@@ -1,0 +1,58 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>The List</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+        <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static '/bootstrap/css/custom.css' %}">
+
+        <script src="{% static '/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-custom mb-3 sticky-top" style="background-color: #808080;">
+            <div class="container-fluid">
+                <a class="navbar-brand mb-0" href="{% url '' %}">LAZAPEE Payroll</span> </a>
+                <p><a href="{% url '' %}" class="text-secondary">Employees</a></p>
+                <p><a href="{% url '' %}" class="text-secondary">Payslips</a></p>
+            </div>
+
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                
+                {% block content %}
+                {% endblock %}
+
+            </div>
+        </div>          
+    </body>
+
+    <nav class="navbar bg-custom fixed-bottom justify-content-center" style="background: #808080;">
+        <div style="color: white;">&copy; 2025</div>
+   </nav>
+
+
+    <!--
+    <footer class="footer bg-custom fixed-bottom" style="background-color: #590404;">
+
+        <div class="container">&copy; 2020</div>
+      
+    </footer>
+     -->
+
+
+    <!--<div class="row fixed-botom bg-custom" style="background-color: #590404;"> -->
+        <!-- Copyright -->
+       <!-- <div class="col-12 text-center"> -->
+                <!--<p class="text-center"> &copy; 2020</p> -->
+
+            
+        <!-- </div> -->
+        <!-- Copyright -->
+      
+    </div>
+</html>
