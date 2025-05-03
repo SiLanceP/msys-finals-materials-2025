@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LazapeeConfig(AppConfig):
+class PayrollAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'lazapee'
+    name = 'payroll_app'
