@@ -1,12 +1,8 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
-
 # Create your models here.
 class Employee(models.Model):
     name = models.CharField(max_length=100)
-    id_number = models.CharField(max_length=20, unique=True, required=True)
+    id_number = models.CharField(max_length=20, unique=True, blank=False)
     rate = models.FloatField(default=0.0, null=True)
     overtime_pay = models.FloatField(default=0.0, null=True)
     allowance = models.FloatField(default=0.0, null=True)

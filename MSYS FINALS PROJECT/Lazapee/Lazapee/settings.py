@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'payroll_app.apps.PayrollAppConfig',
-    ('payroll_app')
 ]
 
 MIDDLEWARE = [
