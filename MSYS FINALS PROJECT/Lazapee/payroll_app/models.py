@@ -67,3 +67,14 @@ class Payslip(models.Model):
         return self.total_pay
     def __str__(self):
         return f"pk: {self.pk}, Employee: {self.id_number}, Period: {self.month} {self.date_range}, {self.year}, Cycle: {self.pay_cycle}, Total Pay: {self.total_pay}"
+
+class Account(models.Model):
+    username = models.CharField(max_length=100, unique=True)
+    password = models.CharField(max_length=100)
+
+    def getUsername(self):
+        return self.username
+    def getPassword(self):
+        return self.password
+    def __str__(self):
+        return f"Account: {self.username}"
