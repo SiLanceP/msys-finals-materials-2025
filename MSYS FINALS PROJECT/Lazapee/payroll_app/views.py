@@ -16,7 +16,7 @@ def login(request):
                 # Stores the User info in a session (makes sure that the user is logged in when looking at the pages)
                 request.session['user_id'] = account.id
                 request.session['username'] = account.username
-                return redirect('view_employeepage')# Change this if needed
+                return redirect('view_employee')# Change this if needed
             else:
                 return render(request, 'payroll_app/login.html', {'error': 'Invalid login'}) # Change this if needed
         except Account.DoesNotExist:
@@ -47,3 +47,4 @@ def logout(request):
 
 def aunthentication(request):
     return 'user_id' in request.session
+
