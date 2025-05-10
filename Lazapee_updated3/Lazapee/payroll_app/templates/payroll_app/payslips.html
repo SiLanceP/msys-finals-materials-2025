@@ -1,6 +1,15 @@
 {% extends "payroll_app/base.html" %}
 {% block content %}
 
+{% if error %}
+<div class="col-12">
+    <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+        {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+{% endif %}
+
 <div class="row justify-content-center">
     <div class="col-md-8">
         <h2 style="font-family: 'roboto'; font-weight: strong;">Payroll Creation</h2>
@@ -104,4 +113,11 @@
     </div>
 </div>
 
+<!-- JavaScript to auto-close the alert in 5 seconds -->
+<script> 
+    setTimeout(function() {
+        document.querySelector('.alert').remove();
+    }, 7000);
+</script>
 {% endblock %}
+

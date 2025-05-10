@@ -247,12 +247,6 @@ def payslip_list(request):
         year = request.POST.get('year')
         cycle = request.POST.get('cycle')
 
-        if not (payroll_for and month and year and cycle):
-            messages.error(request, "All fields are required.")
-            return redirect('payslip_list')
-        
-        cycle = int(cycle)
-
         if payroll_for == 'all':
             selected = employees
         else:
@@ -260,12 +254,12 @@ def payslip_list(request):
         
         for employee in selected:
             if Payslip.objects.filter(id_number=employee, month=month, year=year, pay_cycle=cycle).exists():
-                messages.error(request, f"Payslip already exists for ID: {employee.id_number}, Month: {month}, Year: {year}, Cycle: {cycle}.")
-                continue
+                return render(request, 'payroll_app/payslips.html', {'employees': employees, 'payslips': payslips, 'error': f"Payslip already exists for ID: {employee.id_number} for {month}, {year}, cycle: {cycle}"})
+            
             half_rate = employee.getRate() / 2
             allowance = employee.getAllowance()
             overtime = employee.getOvertime()
-            if cycle == 1:
+            if cycle == '1':
                 pagibig = 100
                 sss = 0
                 philhealth = 0
