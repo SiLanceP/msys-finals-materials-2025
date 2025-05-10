@@ -1,0 +1,45 @@
+{% extends "payroll_app/base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Employees</h2>
+    <a href="{% url 'employee_add' %}" class="btn btn-secondary mb-3 float-end">+ New Employee</a>
+    
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>ID Number</th>
+                <th>Rate</th>
+                <th>Allowance</th>
+                <th>Overtime Pay</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+            <tr>
+                <td>{{ emp.getName }}</td>
+                <td>{{ emp.getID }}</td>
+                <td>{{ emp.getRate }}</td>
+                <td>{{ emp.getAllowance|default_if_none:"0.0" }}</td>
+                <td>{{ emp.getOvertime|default_if_none:"0.0" }}</td>
+                <td>
+                    <a href="{% url 'employee_update' emp.id_number %}" class="btn btn-sm btn-warning">Update</a>
+                    <form method="post" action="{% url 'employee_delete' emp.id_number %}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete {{emp.getName}}?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                    <form method="post" action="{% url 'employee_add_overtime' emp.id_number %}" style="display: inline-block; margin-top: 5px;">
+                        {% csrf_token %}
+                        <input type="number" name="overtime_hours" step="0.01" placeholder="Hours" class="form-control-sm" style="width: 80px;" required>
+                        <button type="submit" class="btn btn-sm btn-info">Add Overtime</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6">No employees found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

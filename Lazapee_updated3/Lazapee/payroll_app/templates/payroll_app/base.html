@@ -1,0 +1,84 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>LAZAPEE</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+        <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static '/bootstrap/css/custom.css' %}">
+
+        <script src="{% static '/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark navbar-expand-lg bg-custom mb-3 sticky-top" style="background-color: #808080;">
+            <div class="container-fluid">
+                <a class="navbar-brand mb-0" href="{% url 'employee_list' %}">LAZAPEE Payroll</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="{% url 'employee_list' %}" class="nav-link {% if request.resolver_match.url_name == 'employee_list' %}active text-white fw-bold{% else %}text-secondary{% endif %}">Employees</a>
+                        </li>
+                        <li class="nav-item">
+
+                            <a href="{% url 'payslip_list' %}" class="nav-link {% if request.resolver_match.url_name == 'payslip_list' %}active text-white fw-bold{% else %}text-secondary{% endif %}">Payslips</a>
+
+                        </li>
+                    </ul>
+                    
+                    {% if request.session.user_id %} <!--to check if user is logged in-->
+                    <span class="navbar-text text-light me-3">
+                        Logged in as: {{ request.session.username }} 
+                    </span>
+                    <a href="{% url 'logout' %}" class="btn btn-sm btn-outline-light">Logout</a>
+                    <a href="{% url 'manage_acc' pk=request.session.user_id %}" class="mx-2 btn btn-sm btn-outline-light">Manage Account</a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-sm btn-outline-light">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                {% if messages %}
+                    <div class="col-12">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-1" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>                            
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+                
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>          
+    </body>
+
+    <nav class="navbar bg-custom fixed-bottom justify-content-center mt-5" style="background: #808080;">
+        <div style="color: white;">© {% now "Y" %}</div>
+   </nav>
+
+    <!--
+    <footer class="footer bg-custom fixed-bottom" style="background-color: #590404;">
+
+        <div class="container">© 2020</div>
+      
+    </footer>
+     -->
+
+    <!--<div class="row fixed-botom bg-custom" style="background-color: #590404;"> -->
+        <!-- Copyright -->
+       <!-- <div class="col-12 text-center"> -->
+                <!--<p class="text-center"> © 2020</p> -->
+        <!-- </div> -->
+        <!-- Copyright -->
+    <!--</div>-->
+</html>
